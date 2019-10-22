@@ -15,7 +15,8 @@ namespace SoftwareRenderer.Renderer
 
             for (int i = 0; i < object3D.Triangles.Length; i++)
             {
-                Rasterize.Triangle(object3D.Triangles[i], context, 1, null);
+                float light = Vector3.Angle(Vector3.Forward, object3D.Triangles[i].Normal) / 180F;
+                Rasterize.Triangle(object3D.Triangles[i], context, light, object3D.material);
             }
         }
     }

@@ -7,6 +7,7 @@ namespace SoftwareRenderer.Math
         public static Vector3 Zero { get { return new Vector3(0, 0, 0); } }
         public static Vector3 One { get { return new Vector3(1, 1, 1); } }
         public static Vector3 Up { get { return new Vector3(0,1,0);} }
+        public static Vector3 Forward { get { return new Vector3(0, 0, 1); } }
 
         public float X
         {

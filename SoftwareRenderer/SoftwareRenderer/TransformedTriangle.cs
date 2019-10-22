@@ -26,12 +26,14 @@ namespace SoftwareRenderer
         public Vector2 UV1 { get => tuv1; }
         public Vector2 UV2 { get => tuv2; }
 
+        public Vector3 Normal { get => tnormal; }
 
         private Vector3 rotation;
         private Vector3 eulerRotation;
 
         private Vector3 tv0, tv1, tv2;
         private Vector2 tuv0, tuv1, tuv2;
+        private Vector3 tnormal;
 
         private Vector3 v0, v1, v2;
         private Vector2 uv0, uv1, uv2;
@@ -55,11 +57,13 @@ namespace SoftwareRenderer
 
         private void RecalculateView()
         {
-            Matrix4x4 viewMatrix = Matrix4x4.ModelMatrix(RendererContext.CurrentContext.Size, rotation);
+            Matrix4x4 rotationMatrix = Matrix4x4.RotationMatrix(rotation);
+            Matrix4x4 viewMatrix = Matrix4x4.ViewMatrix(RendererContext.CurrentContext.Size.X, RendererContext.CurrentContext.Size.Y) * rotationMatrix;
 
             tv0 = viewMatrix.Multiply(v0);
             tv1 = viewMatrix.Multiply(v1);
             tv2 = viewMatrix.Multiply(v2);
+            tnormal = rotationMatrix.Multiply(normal);
 
             if (tv0.Y > tv1.Y) { Vector3.Swap(ref tv0, ref tv1); Vector2.Swap(ref tuv0, ref tuv1); }
             if (tv0.Y > tv2.Y) { Vector3.Swap(ref tv0, ref tv2); Vector2.Swap(ref tuv0, ref tuv2); }

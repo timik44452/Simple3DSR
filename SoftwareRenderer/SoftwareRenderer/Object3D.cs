@@ -1,10 +1,12 @@
 ﻿using SoftwareRenderer.Math;
+using SoftwareRenderer.Renderer;
 
 namespace SoftwareRenderer
 {
     public class Object3D
     {
         public TransformedTriangle[] Triangles;
+        public Material material;
 
         public Object3D(Mesh mesh)
         {

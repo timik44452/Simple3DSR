@@ -19,7 +19,7 @@ namespace SoftwareRenderer.Renderer
         public static void Triangle(
             TransformedTriangle triangle,
             RendererContext context,
-            float light, Texture texture)
+            float light, Material material)
 
         {
             int IL = (int)(255 * light);

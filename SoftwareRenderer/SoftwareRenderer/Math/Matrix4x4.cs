@@ -115,9 +115,12 @@
 
         public static Matrix4x4 ModelMatrix(Vector2 screenSize, Vector3 rotation)
         {
-            return ViewMatrix(screenSize.X, screenSize.Y) * Z_Matrix(rotation.Z) * Y_Matrix(rotation.Y) * X_Matrix(rotation.X);
+            return ViewMatrix(screenSize.X, screenSize.Y);
         }
-        
+        public static Matrix4x4 RotationMatrix(Vector3 rotation)
+        {
+            return Z_Matrix(rotation.Z) * Y_Matrix(rotation.Y) * X_Matrix(rotation.X);
+        }
         
     }
 }
