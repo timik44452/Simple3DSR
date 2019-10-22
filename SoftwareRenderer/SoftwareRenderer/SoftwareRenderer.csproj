@@ -60,6 +60,9 @@
     <Compile Include="Math\Vector3.cs" />
     <Compile Include="Math\Vector4.cs" />
     <Compile Include="Mesh.cs" />
+    <Compile Include="MeshSerializationContainer.cs" />
+    <Compile Include="Object3D.cs" />
+    <Compile Include="Primitives.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RendererBox.cs">
@@ -69,10 +72,14 @@
       <DependentUpon>RendererBox.cs</DependentUpon>
     </Compile>
     <Compile Include="RendererContext.cs" />
+    <Compile Include="Renderer\Graphic.cs" />
     <Compile Include="Renderer\Material.cs" />
     <Compile Include="Renderer\Pixel.cs" />
     <Compile Include="Renderer\Rasterize.cs" />
     <Compile Include="Renderer\Texture.cs" />
+    <Compile Include="Service\Serializator.cs" />
+    <Compile Include="TransformedTriangle.cs" />
+    <Compile Include="Triangle.cs" />
     <EmbeddedResource Include="Engine.resx">
       <DependentUpon>Engine.cs</DependentUpon>
     </EmbeddedResource>

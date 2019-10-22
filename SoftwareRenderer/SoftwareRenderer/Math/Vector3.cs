@@ -1,10 +1,11 @@
 ﻿
 namespace SoftwareRenderer.Math
 {
+    [System.Serializable]
     public struct Vector3
     {
         public static Vector3 Zero { get { return new Vector3(0, 0, 0); } }
-        public static Vector3 Empty { get { return new Vector3(1, 1, 1); } }
+        public static Vector3 One { get { return new Vector3(1, 1, 1); } }
         public static Vector3 Up { get { return new Vector3(0,1,0);} }
 
         public float X
@@ -26,6 +27,7 @@ namespace SoftwareRenderer.Math
                 Recalculate();
             }
         }
+
         public float Z
         {
             get => z;
@@ -78,6 +80,15 @@ namespace SoftwareRenderer.Math
             return returnValue;
         }
 
+
+        public static void Swap(ref Vector3 a, ref Vector3 b)
+        {
+            Vector3 buffer = a;
+            a = b;
+            b = buffer;
+        }
+        
+
         public static float Distance(Vector3 a, Vector3 b)
         {
             return (a - b).Length;
@@ -107,9 +118,15 @@ namespace SoftwareRenderer.Math
         {
             return new Vector3(a.x * b.x , a.y * b.y , a.z * b.z);
         }
-        public static Vector3 Lerp(Vector3 v1, Vector3 v3, float alpha)
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float alpha)
         {
-            return v1 + (v3 - v1) * alpha;
+            a.x += (b.x - a.x) * alpha;
+            a.y += (b.y - a.y) * alpha;
+            a.z += (b.z - a.z) * alpha;
+
+            a.Recalculate();
+
+            return a;
         }
 
         public override string ToString()
@@ -122,6 +139,14 @@ namespace SoftwareRenderer.Math
             summ = x + y + z;
             dot = x * y * z;
             length = (float)System.Math.Sqrt(x * x + y * y + z * z);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Vector3 vector &&
+                   x == vector.x &&
+                   y == vector.y &&
+                   z == vector.z;
         }
     }
 }

@@ -26,6 +26,8 @@
         public float Summ { get => summ; }
         public float Dot { get => dot; }
 
+        public static Vector2 Zero { get => new Vector2(); }
+
 
         private float
             x, y,
@@ -42,6 +44,12 @@
             Recalculate();
         }
 
+        public static void Swap(ref Vector2 a, ref Vector2 b)
+        {
+            Vector2 buffer = a;
+            a = b;
+            b = buffer;
+        }
 
         public static Vector2 operator +(Vector2 a,Vector2 b)
         {
@@ -55,9 +63,14 @@
         {
             return new Vector2(a.x * b, a.y * b);
         }
-        public static Vector2 Lerp(Vector2 uvA, Vector2 uvB, float delta)
+        public static Vector2 Lerp(Vector2 a, Vector2 b, float alpha)
         {
-            return uvA + (uvB - uvA) * delta;
+            a.x += (b.x - a.x) * alpha;
+            a.y += (b.y - a.y) * alpha;
+
+            a.Recalculate();
+
+            return a;
         }
         public override string ToString()
         {

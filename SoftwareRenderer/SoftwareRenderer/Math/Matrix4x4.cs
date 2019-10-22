@@ -67,14 +67,10 @@
                                  a.line3.X * b.X, a.line3.Y * b.Y, a.line3.Z * b.Z, a.line3.W * b.W,
                                  a.line4.X * b.X, a.line4.Y * b.Y, a.line4.Z * b.Z, a.line4.W * b.W);
         }
-        public static Vector3 operator *(Vector3 a,Matrix4x4 b)
-        {
-            return (b * a.getVector4).getColumns;
-        }
+
         public static float cos, sin;
         public static Matrix4x4 X_Matrix(float angle)
         {
-            //angle = angle * (float)Math.PI / 180f;
             cos = (float)System.Math.Cos(angle);
             sin = (float)System.Math.Sin(angle);
             return new Matrix4x4(1, 0, 0,0,
@@ -84,7 +80,6 @@
         }
         public static Matrix4x4 Y_Matrix(float angle)
         {
-            //angle = angle * (float)Math.PI / 180f;
             cos = (float)System.Math.Cos(angle);
             sin = (float)System.Math.Sin(angle);
             return new Matrix4x4(cos, 0, -sin,0,
@@ -94,7 +89,6 @@
         }
         public static Matrix4x4 Z_Matrix(float angle)
         {
-            //angle = angle * (float)Math.PI / 180f;
             cos = (float)System.Math.Cos(angle);
             sin = (float)System.Math.Sin(angle);
 
@@ -103,27 +97,25 @@
                                  0, 0, 1,0,
                                  0,0,0,1);
         }
-        public static Matrix4x4 W_Matrix(float angle)
+        public static Matrix4x4 ViewMatrix(float ScreenWidth, float ScreenHeight)
         {
-            //angle = angle * (float)Math.PI / 180f;
-            cos = (float)System.Math.Cos(angle);
-            sin = (float)System.Math.Sin(angle);
-
-            return new Matrix4x4(1, 0, 0, 0,
-                                 0, 1, 0, 0,
-                                 0, 0, cos, sin,
-                                 0, 0, -sin, cos);
-        }
-        public Matrix4x4 dot(Vector3 value)
-        {
-            return new Matrix4x4(line1 * value.X, line2 * value.Y, line3 * value.Z, line4);
+            return new Matrix4x4(32, 0, 0, ScreenWidth / 2,
+                                 0, -32, 0, ScreenHeight / 2,
+                                 0, 0, 1, 0,
+                                 0, 0, 0, 1);
         }
 
-        public static Matrix4x4 modelMatrix(Vector3 point,Vector3 rotation,Vector3 scale)
+        public Vector3 Multiply(Vector3 vector)
         {
-            rotation = rotation * (float)System.Math.PI / 180F;
+            return new Vector3(
+                vector.X * line1.X + vector.Y * line1.Y + vector.Z * line1.Z + line1.W,
+                vector.X * line2.X + vector.Y * line2.Y + vector.Z * line2.Z + line2.W,
+                vector.X * line3.X + vector.Y * line3.Y + vector.Z * line3.Z + line3.W);
+        }
 
-            return Z_Matrix(rotation.Z) * Y_Matrix(rotation.Y) * X_Matrix(rotation.X) * point.getVector4 * scale.getVector4;
+        public static Matrix4x4 ModelMatrix(Vector2 screenSize, Vector3 rotation)
+        {
+            return ViewMatrix(screenSize.X, screenSize.Y) * Z_Matrix(rotation.Z) * Y_Matrix(rotation.Y) * X_Matrix(rotation.X);
         }
         
         

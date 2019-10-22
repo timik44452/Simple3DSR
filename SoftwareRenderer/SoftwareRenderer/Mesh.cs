@@ -2,17 +2,14 @@
 
 namespace SoftwareRenderer
 {
+    [System.Serializable]
     public class Mesh
     {
-        public Triangle[] Triangles { get => triangles; }
-        public Vector3[] Vertices { get => vertices; }
-        public Vector3[] Normals { get => normals; }
-        public Vector2[] UVs { get => uvs; }
+        public Triangle[] Triangles;
 
-        private Triangle[] triangles;
-        private Vector3[] vertices;
-        private Vector3[] normals;
-        private Vector2[] uvs;
-
+        public void SetTriangles(params Triangle[] triangles)
+        {
+            Triangles = triangles;
+        }
     }
 }

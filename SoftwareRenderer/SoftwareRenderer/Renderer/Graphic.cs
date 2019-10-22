@@ -1,22 +1,21 @@
-﻿using SoftwareRenderer.Renderer;
+﻿using SoftwareRenderer.Math;
 
 namespace SoftwareRenderer.Renderer
 {
     public static class Graphic
     {
-        public static void Draw(Mesh mesh, RendererContext context)
+        public static void Draw(Object3D object3D, RendererContext context)
         {
-            throw new System.NotImplementedException();
-
-            if (mesh == null)
+            if (object3D == null || context == null)
             {
                 return;
             }
-        
-            for(int i = 0; i < mesh.Triangles.Length; i++)
-            {
-                Triangle triangle = mesh.Triangles[i];
 
+            context.ResetBuffers();
+
+            for (int i = 0; i < object3D.Triangles.Length; i++)
+            {
+                Rasterize.Triangle(object3D.Triangles[i], context, 1, null);
             }
         }
     }

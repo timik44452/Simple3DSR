@@ -36,18 +36,22 @@
             this.rendererBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rendererBox.Location = new System.Drawing.Point(0, 0);
             this.rendererBox.Name = "rendererBox";
-            this.rendererBox.Size = new System.Drawing.Size(1139, 591);
+            this.rendererBox.Size = new System.Drawing.Size(624, 441);
             this.rendererBox.TabIndex = 0;
+            this.rendererBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rendererBox_MouseDown);
+            this.rendererBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.rendererBox_MouseMove);
+            this.rendererBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rendererBox_MouseUp);
             // 
             // Engine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1139, 591);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.rendererBox);
             this.Name = "Engine";
             this.Text = "Engine";
             this.Load += new System.EventHandler(this.OnLoad);
+            this.Resize += new System.EventHandler(this.Engine_Resize);
             this.ResumeLayout(false);
 
         }

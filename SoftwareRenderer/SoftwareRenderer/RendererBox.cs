@@ -20,7 +20,7 @@ namespace SoftwareRenderer
             InitializeComponent();
         }
 
-        public void InitGDI()
+        public void InitGDI(int Width, int Height)
         {
             try
             {
